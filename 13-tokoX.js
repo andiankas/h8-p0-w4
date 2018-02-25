@@ -1,14 +1,58 @@
 function countProfit(shoppers) {
+    if (shoppers.length < 1) {
+        return shoppers
+    }
     let listBarang = [['Sepatu Stacattu', 1500000, 10],
     ['Baju Zoro', 500000, 2],
     ['Sweater Uniklooh', 175000, 1]
     ];
+    var simpannamaspatu = [], simpannamabaju = [], simpannamasweater = []
+    var totalbarang = 0, profitspatu = 0, profitbaju = 0, profitsweater = 0
+    for (var j = 0; j < shoppers.length; j++) {
+        if (shoppers[j]['product'] === 'Sepatu Stacattu') {
+            if (listBarang[0][2] - shoppers[j]['amount'] >= 0) {
+                listBarang[0][2] = listBarang[0][2] - shoppers[j]['amount']
+                profitspatu = profitspatu + (shoppers[j]['amount'] * 1500000)
+                simpannamaspatu.push(shoppers[j].name)
+            }
+        }
+        else if (shoppers[j]['product'] === 'Baju Zoro') {
+            if (listBarang[1][2] - shoppers[j]['amount'] >= 0) {
+                listBarang[1][2] = listBarang[1][2] - shoppers[j]['amount']
+                profitbaju = profitbaju + (shoppers[j]['amount'] * 500000)
+                simpannamabaju.push(shoppers[j].name)
+            }
+        }
+        else if (shoppers[j]['product'] === 'Sweater Uniklooh') {
+            if (listBarang[2][2] - shoppers[j]['amount'] >= 0) {
+                listBarang[2][2] = listBarang[2][2] - shoppers[j]['amount']
+                profitsweater = profitsweater + (shoppers[j]['amount'] * 175000)
+                simpannamasweater.push(shoppers[j].name)
+            }
+        }
+    }
 
-    // you can only write your code here!
-    
-
-
+    var tampilarray = [{
+        product: 'Sepatu Stacattu',
+        shoppers: simpannamaspatu,
+        leftOver: listBarang[0][2],
+        totalProfit: profitspatu
+    },
+    {
+        product: 'Baju Zoro',
+        shoppers: simpannamabaju,
+        leftOver: listBarang[1][2],
+        totalProfit: profitbaju
+    },
+    {
+        product: 'Sweater Uniklooh',
+        shoppers: simpannamasweater,
+        leftOver: listBarang[2][2],
+        totalProfit: profitsweater
+    }]
+    return tampilarray
 }
+
 
 // TEST CASES
 console.log(countProfit([{ name: 'Windi', product: 'Sepatu Stacattu', amount: 2 }, { name: 'Vanessa', product: 'Sepatu Stacattu', amount: 3 }, { name: 'Rani', product: 'Sweater Uniklooh', amount: 2 }]));
