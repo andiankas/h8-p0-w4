@@ -1,33 +1,37 @@
-function cariModus(arr) {
-    // you can only write your code here!
-    arr.sort(function (a, b) {
-        return a - b;
-    });
 
-    
-    for(var i=0;i<arr.length;i++){
-        
+function cariModus(arr) {
+    var index = 0;
+    var banding = 0;
+    for (var i = 0; i < arr.length; i++) {
         var tampung = 0;
-            
-        if (arr[i]== arr[i+1]) {
-            tampung += arr[i]
-            break;
-            
-        }else{
-            if (arr[0] === arr[arr.length-1] ) {
-                tampung = -1
-            }else{
-                tampung = -1
+        for (var j = 0; j < arr.length; j++) {
+            //         console.log(i+' - '+j)
+            if (arr[i] == arr[j] && i !== j) {
+
+                tampung++
+                //console.log('tampung - '+tampung)
+                if (tampung > banding) {
+                    banding = tampung;
+                    index = i;
+                }
             }
         }
-
-            // console.log(arr[i])
     }
 
-    return tampung
+    if (banding === 0) {
+        return -1
+    }
+    var arit = 0;
+    for (var k = 0; k < arr.length; k++) {
+        arit += arr[k];
+        if (arit / arr.length === arr[k]) {
+            return -1
+        }
 
-
+    }
+    return arr[index];
 }
+
 
 // TEST CASES
 console.log(cariModus([10, 4, 5, 2, 4])); // 4
