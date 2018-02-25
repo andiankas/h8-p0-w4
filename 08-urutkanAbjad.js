@@ -1,8 +1,6 @@
 function urutkanAbjad(str) {
     // you can only write your code here!
-    for(i=0;i<str.length;i++){
-        console.log(str[i]);
-    }
+    return str.split('').sort().join('');
 }
 
 // TEST CASES
